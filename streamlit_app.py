@@ -30,10 +30,11 @@ risk_score = st.number_input("Account Risk Score", value=0.0)
 # 3️⃣ Prediction (HERE!)
 # --------------------
 if st.button("Check Fraud"):
-   X = np.array([[amount, frequency, risk_score]]) # ← PUT HERE
-    result = model.predict(X)[0]      # ← PUT HERE
+    X = np.array([[amount, frequency, risk_score]])
+    result = model.predict(X)[0]
 
     if result == 1:
         st.error("🚨 Fraud Detected")
     else:
         st.success("✅ Not Fraud")
+
