@@ -22,15 +22,15 @@ model.fit(X_train, y_train)
 # --------------------
 st.title("💳 Fraud Detection App")
 
-f1 = st.number_input("Feature 1", value=0.0)
-f2 = st.number_input("Feature 2", value=0.0)
-f3 = st.number_input("Feature 3", value=0.0)
+amount = st.number_input("Transaction Amount", value=0.0)
+frequency = st.number_input("Transaction Frequency", value=0.0)
+risk_score = st.number_input("Account Risk Score", value=0.0)
 
 # --------------------
 # 3️⃣ Prediction (HERE!)
 # --------------------
 if st.button("Check Fraud"):
-    X = np.array([[amount, frequency, risk_score]])
+   X = np.array([[amount, frequency, risk_score]])
      # ← PUT HERE
     result = model.predict(X)[0]      # ← PUT HERE
 
