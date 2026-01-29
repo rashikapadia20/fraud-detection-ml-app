@@ -30,7 +30,8 @@ f3 = st.number_input("Feature 3", value=0.0)
 # 3️⃣ Prediction (HERE!)
 # --------------------
 if st.button("Check Fraud"):
-    X = np.array([[f1, f2, f3]])      # ← PUT HERE
+    X = np.array([[amount, frequency, risk_score]])
+     # ← PUT HERE
     result = model.predict(X)[0]      # ← PUT HERE
 
     if result == 1:
