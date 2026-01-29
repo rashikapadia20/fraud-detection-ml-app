@@ -1,6 +1,25 @@
 import streamlit as st
+import joblib
+import numpy as np
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
+st.set_page_config(page_title="Fraud Detection", layout="centered")
+
+st.title("🚨 Startup Fraud Detection System")
+
+# Load model
+model = joblib.load("model.pkl")
+
+st.write("Enter details to check fraud risk")
+
+f1 = st.number_input("Feature 1", value=0.0)
+f2 = st.number_input("Feature 2", value=0.0)
+f3 = st.number_input("Feature 3", value=0.0)
+
+if st.button("Check Fraud"):
+    X = np.array([[f1, f2, f3]])
+    pred = model.predict(X)
+
+    if pred[0] == 1:
+        st.error("⚠️ Fraud Detected")
+    else:
+        st.success("✅ Not Fraud")
