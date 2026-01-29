@@ -2,11 +2,24 @@ import streamlit as st
 import numpy as np
 
 # Fake rule-based "model" (temporary)
-def predict_fraud(x):
-    # simple logic: large values → fraud
-    if x.sum() > 3:
-        return 1
-    return 0
+from sklearn.linear_model import LogisticRegression
+
+# -----------------------------
+# Train real ML model in-app
+# -----------------------------
+X_train = np.array([
+    [0.1, 0.2, 0.1],
+    [2.0, 2.1, 2.2],
+    [0.3, 0.1, 0.2],
+    [3.0, 3.2, 3.1],
+    [0.2, 0.4, 0.3],
+    [4.0, 4.1, 4.2]
+])
+
+y_train = np.array([0, 1, 0, 1, 0, 1])
+
+model = LogisticRegression()
+model.fit(X_train, y_train)
 
 st.title("💳 Fraud Detection App")
 
