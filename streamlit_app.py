@@ -1,19 +1,22 @@
 import streamlit as st
 import numpy as np
-from sklearn.linear_model import LogisticRegression
 import joblib
 
+# --------------------
+# Load model
+# --------------------
 model = joblib.load("model.pkl")
+
+# --------------------
+# Prediction function
+# --------------------
 def predict_data(a, b, c):
     x = np.array([[a, b, c]])
     prediction = model.predict(x)[0]
     return prediction
 
 # --------------------
-
-
-# --------------------
-# 2️⃣ App UI
+# 1️⃣ Fraud Detection UI
 # --------------------
 st.title("💳 Fraud Detection App")
 
@@ -23,13 +26,15 @@ risk_score = st.number_input("Account Risk Score", value=0.0)
 
 if st.button("Predict"):
     result = predict_data(amount, frequency, risk_score)
-    st.write("Prediction:", result)
+    
+    if result == 1:
+        st.error("🚨 Fraud Detected")
+    else:
+        st.success("✅ Safe Transaction")
 
 # --------------------
-# 3️⃣ Prediction (HERE!)
+# 2️⃣ Startup Section (Simplified)
 # --------------------
-
-
 st.title("🚨 Startup Fraud Detection System")
 
 startup = st.text_input("Startup Name")
@@ -43,19 +48,12 @@ linkedin = st.slider("LinkedIn %", 0, 100, 50)
 web = st.slider("Web Reputation", 0, 100, 50)
 
 if st.button("Check Fraud"):
-    X = np.array([[amount, frequency, risk_score]])
-    result = model.predict(X)[0]
-    result = predict(startup, sector, stage, rev, val, growth, linkedin, web)
+    # Using SAME model (for now simple logic)
+    result = predict_data(rev, val, growth)
 
     st.subheader("Result")
 
-    st.write("Risk Score:", result['risk_score'])
-    st.write("Risk Level:", result['risk_level'])
-
     if result == 1:
-        st.error("🚨 Fraud Detected")
+        st.error("🚨 High Risk Startup")
     else:
-        st.success("✅ Not Fraud")
-    st.write("Justification:")
-    for j in result['justification']:
-        st.write("•", j)
+        st.success("✅ Low Risk Startup")
