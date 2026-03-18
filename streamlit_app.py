@@ -15,7 +15,8 @@ def predict_data(a, b, c):
 # --------------------
 # 2️⃣ App UI
 # --------------------
-st.title("💳 Fraud Detection App")
+st.title("💳 Transaction Fraud Detection")
+
 
 amount = st.number_input("Transaction Amount", value=0.0)
 frequency = st.number_input("Transaction Frequency", value=0.0)
