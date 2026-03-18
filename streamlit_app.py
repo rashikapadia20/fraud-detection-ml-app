@@ -29,7 +29,7 @@ risk_score = st.number_input("Account Risk Score", value=0.0)
 # --------------------
 # 3️⃣ Prediction (HERE!)
 # --------------------
-from your_python_file_name import predict   # IMPORTANT
+from app import predict_data  # IMPORTANT
 
 st.title("🚨 Startup Fraud Detection System")
 
