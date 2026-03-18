@@ -6,9 +6,23 @@ import joblib
 model = joblib.load("model.pkl")
 def predict_data(a, b, c):
     x = np.array([[a, b, c]])
-    prediction = model.predict(x)[0]
-    return prediction
+    
+    score = -model.decision_function(x)[0]
+    risk = round(score * 100, 2)
+    
+    if risk > 70:
+        return 1   # Fraud
+    else:
+        return 0   # Safe
 
+
+if st.button("Predict"):
+    result = predict_data(amount, frequency, risk_score)
+
+    if result == 1:
+        st.error("🚨 Fraud Detected")
+    else:
+        st.success("✅ Safe Transaction")
 # --------------------
 
 
