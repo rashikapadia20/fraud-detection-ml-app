@@ -1,21 +1,16 @@
 import streamlit as st
 import numpy as np
 from sklearn.linear_model import LogisticRegression
+import joblib
+
+model = joblib.load("model.pkl")
+def predict_data(a, b, c):
+    x = np.array([[a, b, c]])
+    prediction = model.predict(x)[0]
+    return prediction
 
 # --------------------
-# 1️⃣ Train the model
-# --------------------
-X_train = np.array([
-    [0.1, 0.2, 0.1],
-    [2.0, 2.1, 2.2],
-    [0.3, 0.1, 0.2],
-    [3.0, 3.2, 3.1]
-])
 
-y_train = np.array([0, 1, 0, 1])
-
-model = LogisticRegression()
-model.fit(X_train, y_train)
 
 # --------------------
 # 2️⃣ App UI
@@ -26,10 +21,14 @@ amount = st.number_input("Transaction Amount", value=0.0)
 frequency = st.number_input("Transaction Frequency", value=0.0)
 risk_score = st.number_input("Account Risk Score", value=0.0)
 
+if st.button("Predict"):
+    result = predict_data(amount, frequency, risk_score)
+    st.write("Prediction:", result)
+
 # --------------------
 # 3️⃣ Prediction (HERE!)
 # --------------------
-from app import predict_data  # IMPORTANT
+
 
 st.title("🚨 Startup Fraud Detection System")
 
